@@ -386,5 +386,3 @@ Project ini telah mendapatkan:
 - GitHub followers badge
 - Custom badge untuk creator
 - Project stats dengan username
-
-README ini sekarang sudah fully personalized dengan identitas Anda! 🚀
