@@ -16,7 +16,7 @@
 <br>
 
 <p align="center">
-  <img src="https://via.placeholder.com/800x400/0f172a/3b82f6?text=NEON+CALCULATOR+BY+IlhamXkyo" alt="Neon Calculator Preview" width="80%">
+  <img src="preview.png" alt="Neon Calculator Preview" width="80%">
 </p>
 
 ## 👨‍💻 Tentang Creator
