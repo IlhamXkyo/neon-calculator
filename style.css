@@ -1,0 +1,598 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+html, body {
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    position: relative;
+}
+
+/* Animated Background - Diperbaiki agar tidak mengganggu scroll */
+body::before {
+    content: '';
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+    animation: rotate 20s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+    top: -50%;
+    left: -50%;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.calculator {
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 32px;
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(59, 130, 246, 0.2) inset,
+        0 0 30px rgba(59, 130, 246, 0.2);
+    padding: 28px;
+    max-width: 550px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin: 20px auto;
+}
+
+/* Glassmorphism Header - Diperbaiki */
+.calculator::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+    border-radius: 32px 32px 50% 50%;
+    filter: blur(20px);
+    z-index: -1;
+    pointer-events: none;
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
+}
+
+/* Modern Display */
+.display {
+    background: #0b1120;
+    border-radius: 24px;
+    padding: 20px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    box-shadow: 
+        0 10px 30px -15px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(59, 130, 246, 0.2) inset;
+    position: relative;
+    overflow: hidden;
+}
+
+.display::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1), transparent 70%);
+    animation: pulse 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+#result {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-size: 42px;
+    font-weight: 600;
+    text-align: right;
+    outline: none;
+    color: #fff;
+    letter-spacing: -1px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+    transition: font-size 0.3s ease;
+}
+
+#history {
+    font-size: 16px;
+    color: #94a3b8;
+    min-height: 24px;
+    text-align: right;
+    margin-top: 8px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    position: relative;
+    z-index: 1;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+/* Modern Button Grid */
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    border: none;
+    padding: 18px 12px;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.3px;
+    z-index: 2;
+}
+
+/* Button Hover Effects - Diperbaiki */
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    z-index: -1;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Modern Number Buttons - Dark Theme */
+.number {
+    background: #1e293b;
+    color: #e2e8f0;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.number:hover {
+    background: #334155;
+    border-color: #3b82f6;
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+    color: #fff;
+}
+
+/* Modern Operator Buttons - Blue Theme */
+.operator {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+    font-weight: 600;
+}
+
+.operator:hover {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+}
+
+/* Modern Function Buttons - Purple/Blue Gradient */
+.function {
+    background: linear-gradient(135deg, #2d3a5e, #1e293b);
+    color: #a5b4fc;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.function:hover {
+    background: linear-gradient(135deg, #3b4a6b, #2d3a5e);
+    color: #c7d2fe;
+    border-color: #8b5cf6;
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+}
+
+/* Modern Scientific Buttons - Cyan/Blue */
+.scientific {
+    background: linear-gradient(135deg, #164863, #0a2a3b);
+    color: #7dd3fc;
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    font-size: 16px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.scientific:hover {
+    background: linear-gradient(135deg, #1e5873, #123b4d);
+    color: #bae6fd;
+    border-color: #06b6d4;
+    box-shadow: 0 8px 20px rgba(6, 182, 212, 0.3);
+}
+
+/* Modern Equals Button - Vibrant Blue */
+.equals {
+    background: linear-gradient(135deg, #3b82f6, #2563eb, #1d4ed8);
+    color: white;
+    grid-column: span 2;
+    font-size: 24px;
+    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 10px 25px -5px rgba(59, 130, 246, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.equals:hover {
+    background: linear-gradient(135deg, #60a5fa, #3b82f6, #2563eb);
+    box-shadow: 
+        0 15px 30px -5px rgba(59, 130, 246, 0.7),
+        0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+    transform: translateY(-2px) scale(1.02);
+}
+
+/* Zero Button - Special */
+.zero {
+    grid-column: span 2;
+    background: #1e293b;
+    color: #e2e8f0;
+}
+
+.zero:hover {
+    background: #334155;
+}
+
+/* Modern Mode Selector */
+.mode-selector {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 15px 20px;
+    background: #0b1120;
+    border-radius: 40px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.mode-selector::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+}
+
+.mode-selector label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #94a3b8;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.mode-selector label:hover {
+    color: #3b82f6;
+}
+
+.mode-selector input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #475569;
+    border-radius: 50%;
+    outline: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.mode-selector input[type="radio"]:checked {
+    border-color: #3b82f6;
+    background: #3b82f6;
+    box-shadow: 0 0 15px #3b82f6;
+}
+
+.mode-selector input[type="radio"]:checked::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+}
+
+/* Memory Indicator */
+.memory-indicator {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #3b82f6;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 4px 12px;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 20px;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    backdrop-filter: blur(5px);
+    animation: glow 2s ease-in-out infinite;
+    z-index: 10;
+}
+
+@keyframes glow {
+    0%, 100% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 15px #3b82f6;
+    }
+}
+
+/* History Panel - Diperbaiki untuk scroll */
+.history-panel {
+    background: #0b1120;
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    max-height: 150px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    z-index: 5;
+}
+
+.history-panel h3 {
+    color: #94a3b8;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: sticky;
+    top: 0;
+    background: #0b1120;
+    padding-bottom: 5px;
+    z-index: 6;
+}
+
+.history-item {
+    color: #e2e8f0;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: rgba(30, 41, 59, 0.5);
+    margin-bottom: 5px;
+    font-size: 14px;
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.history-item:hover {
+    background: #1e293b;
+    border-color: #3b82f6;
+    transform: translateX(5px);
+}
+
+/* Scrollbar Styling - Diperbaiki */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1e293b;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3b82f6;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #60a5fa;
+}
+
+/* Untuk Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #3b82f6 #1e293b;
+}
+
+/* Responsive Design - Diperbaiki */
+@media (max-width: 500px) {
+    body {
+        padding: 10px;
+        align-items: flex-start;
+    }
+    
+    .calculator {
+        padding: 20px;
+        margin: 10px auto;
+    }
+    
+    .btn {
+        padding: 14px 8px;
+        font-size: 16px;
+    }
+    
+    .scientific {
+        font-size: 14px;
+    }
+    
+    #result {
+        font-size: 32px;
+    }
+    
+    h1 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+    
+    .mode-selector {
+        gap: 15px;
+        padding: 12px 15px;
+    }
+    
+    .history-panel {
+        max-height: 120px;
+    }
+}
+
+/* Button Click Animation */
+.btn-clicked {
+    animation: buttonPop 0.2s ease;
+}
+
+@keyframes buttonPop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Neon Glow Effect for Active Elements */
+.btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #3b82f6, 0 0 20px #3b82f6;
+}
+
+/* Gradient Border Animation - Diperbaiki */
+.calculator {
+    position: relative;
+    background-clip: padding-box;
+    border: solid 2px transparent;
+}
+
+.calculator::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    bottom: -2px;
+    left: -2px;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+    animation: borderGlow 3s linear infinite;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+@keyframes borderGlow {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* Container untuk fitur tambahan */
+.extra-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.extra-features .btn {
+    font-size: 14px;
+    padding: 12px;
+}
+
+/* Memastikan semua konten bisa di-scroll */
+main {
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Fix untuk overflow */
+.container {
+    width: 100%;
+    max-width: 550px;
+    margin: 0 auto;
+}

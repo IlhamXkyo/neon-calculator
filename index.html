@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Kalkulator Modern | Neon Edition</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="container">
+        <div class="calculator">
+            <!-- Memory Indicator -->
+            <div class="memory-indicator" id="memoryIndicator" style="display: none;">M</div>
+            
+            <h1>✨ NEON CALCULATOR ✨</h1>
+            
+            <!-- History Panel -->
+            <div class="history-panel" id="historyPanel">
+                <h3>Riwayat Perhitungan</h3>
+                <div id="historyList"></div>
+            </div>
+            
+            <!-- Display Area -->
+            <div class="display">
+                <input type="text" id="result" readonly placeholder="0">
+                <div class="history" id="history"></div>
+            </div>
+
+            <!-- Button Grid -->
+            <div class="buttons">
+                <!-- Baris 1: Fungsi Dasar -->
+                <button class="btn function" onclick="clearAll()">C</button>
+                <button class="btn function" onclick="deleteLast()">⌫</button>
+                <button class="btn function" onclick="appendOperator('(')">(</button>
+                <button class="btn function" onclick="appendOperator(')')">)</button>
+                
+                <!-- Baris 2: Fungsi Ilmiah -->
+                <button class="btn scientific" onclick="calculateFunction('sin')">sin</button>
+                <button class="btn scientific" onclick="calculateFunction('cos')">cos</button>
+                <button class="btn scientific" onclick="calculateFunction('tan')">tan</button>
+                <button class="btn operator" onclick="appendOperator('/')">÷</button>
+                
+                <!-- Baris 3 -->
+                <button class="btn scientific" onclick="calculateFunction('asin')">sin⁻¹</button>
+                <button class="btn scientific" onclick="calculateFunction('acos')">cos⁻¹</button>
+                <button class="btn scientific" onclick="calculateFunction('atan')">tan⁻¹</button>
+                <button class="btn operator" onclick="appendOperator('*')">×</button>
+                
+                <!-- Baris 4 -->
+                <button class="btn scientific" onclick="calculateFunction('log')">log</button>
+                <button class="btn scientific" onclick="calculateFunction('ln')">ln</button>
+                <button class="btn scientific" onclick="calculateFunction('sqrt')">√</button>
+                <button class="btn operator" onclick="appendOperator('-')">−</button>
+                
+                <!-- Baris 5 -->
+                <button class="btn scientific" onclick="calculateFunction('pow2')">x²</button>
+                <button class="btn scientific" onclick="calculateFunction('pow3')">x³</button>
+                <button class="btn scientific" onclick="calculateFunction('powY')">xʸ</button>
+                <button class="btn operator" onclick="appendOperator('+')">+</button>
+                
+                <!-- Baris 6 -->
+                <button class="btn scientific" onclick="appendNumber('pi')">π</button>
+                <button class="btn scientific" onclick="appendNumber('e')">e</button>
+                <button class="btn scientific" onclick="calculateFunction('factorial')">n!</button>
+                <button class="btn operator" onclick="calculateFunction('mod')">mod</button>
+                
+                <!-- Baris 7: Angka dan Desimal -->
+                <button class="btn number" onclick="appendNumber('7')">7</button>
+                <button class="btn number" onclick="appendNumber('8')">8</button>
+                <button class="btn number" onclick="appendNumber('9')">9</button>
+                <button class="btn function" onclick="calculateFunction('abs')">|x|</button>
+                
+                <!-- Baris 8 -->
+                <button class="btn number" onclick="appendNumber('4')">4</button>
+                <button class="btn number" onclick="appendNumber('5')">5</button>
+                <button class="btn number" onclick="appendNumber('6')">6</button>
+                <button class="btn function" onclick="calculateFunction('reciprocal')">1/x</button>
+                
+                <!-- Baris 9 -->
+                <button class="btn number" onclick="appendNumber('1')">1</button>
+                <button class="btn number" onclick="appendNumber('2')">2</button>
+                <button class="btn number" onclick="appendNumber('3')">3</button>
+                <button class="btn function" onclick="appendNumber('.')">.</button>
+                
+                <!-- Baris 10 -->
+                <button class="btn number zero" onclick="appendNumber('0')">0</button>
+                <button class="btn function" onclick="toggleSign()">±</button>
+                <button class="btn equals" onclick="calculate()">=</button>
+            </div>
+
+            <!-- Mode Kalkulator dan Fitur Tambahan -->
+            <div class="mode-selector">
+                <label>
+                    <input type="radio" name="mode" value="deg" checked> Deg
+                </label>
+                <label>
+                    <input type="radio" name="mode" value="rad"> Rad
+                </label>
+                <label>
+                    <input type="radio" name="mode" value="grad"> Grad
+                </label>
+            </div>
+            
+            <!-- Fitur Tambahan -->
+            <div class="extra-features">
+                <button class="btn function" onclick="memoryStore()">MS</button>
+                <button class="btn function" onclick="memoryRecall()">MR</button>
+                <button class="btn function" onclick="memoryClear()">MC</button>
+                <button class="btn function" onclick="memoryAdd()">M+</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
