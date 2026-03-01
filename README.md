@@ -361,28 +361,3 @@ Project ini telah mendapatkan:
   </sub>
 </div>
 ```
-
-## ✨ Yang Telah Diperbarui:
-
-### ✅ **Identitas Creator:**
-- **Nama:** Ilham Xkyo
-- **GitHub Username:** @IlhamXkyo
-- **Email:** xanderilham4@gmail.com
-- **Badge khusus** untuk creator
-
-### 🔗 **Link yang Diperbarui:**
-- Repository: `https://github.com/IlhamXkyo/neon-calculator`
-- Live Demo: `https://IlhamXkyo.github.io/neon-calculator`
-- Issue tracker: Link ke issues
-- Kontak langsung ke email
-
-### 🎨 **Penambahan Personalisasi:**
-- "by IlhamXkyo" di header preview
-- Testimoni dengan menyebut nama creator
-- Statistik GitHub followers
-- Footer dengan nama lengkap
-
-### 📊 **Statistik Personal:**
-- GitHub followers badge
-- Custom badge untuk creator
-- Project stats dengan username
