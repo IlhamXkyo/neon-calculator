@@ -2,6 +2,8 @@
 
 A lightweight, client-side calculator web application with basic arithmetic and scientific functions.
 
+![Neon Calculator Preview](assets/preview.png)
+
 ## Features
 
 - Basic arithmetic operations: addition, subtraction, multiplication, division.
